@@ -3,11 +3,13 @@ package com.ten10.imdb;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 
 @Entity
 public class FilmTitle {
     @Id
     private String tconst;
+    @Lob
     private String primaryTitle;
 
     protected FilmTitle(){
@@ -21,7 +23,7 @@ public class FilmTitle {
     @Override
     public String toString() {
         return String.format(
-                "FilmTitle[titleId='%s', title='%s']",
+                "%s, %s",
                 tconst, primaryTitle);
     }
     public String getTconst() {
