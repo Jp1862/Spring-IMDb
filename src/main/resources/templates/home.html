@@ -1,0 +1,16 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+  <title>Search Form</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<h1>Search for Films</h1>
+<div class="searchBarContainer">
+  <form action="/byPrimaryTitle" method="get">
+    <input type="text" id="search-input" name="title" placeholder="Search for films" class="search-input">
+    <button type="submit" id="search-btn" class="search-btn">Find</button>
+  </form>
+</div>
+</body>
+</html>

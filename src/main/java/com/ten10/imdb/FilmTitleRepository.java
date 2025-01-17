@@ -6,6 +6,7 @@ import java.util.List;
 
 public interface FilmTitleRepository extends CrudRepository<FilmTitle, String> {
 
-    List<FilmTitle> findByPrimaryTitle(String primaryTitle);
+    List<FilmTitle> findByPrimaryTitleContainingIgnoreCase(String primaryTitle);
 
 }
+

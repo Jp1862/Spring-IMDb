@@ -1,15 +1,16 @@
 package com.ten10.imdb;
 
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.Lob;
 
 @Entity
 public class FilmTitle {
     @Id
     private String tconst;
-    @Lob
+
+    @Column (nullable = false, length = 500)
     private String primaryTitle;
 
     protected FilmTitle(){
@@ -27,7 +28,7 @@ public class FilmTitle {
                 tconst, primaryTitle);
     }
     public String getTconst() {
-        return tconst;
+        return tconst.substring(2);
     }
 
     public String getPrimaryTitle() {

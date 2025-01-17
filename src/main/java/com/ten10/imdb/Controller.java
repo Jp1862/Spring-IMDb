@@ -1,29 +1,38 @@
 package com.ten10.imdb;
 
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
 import java.util.List;
 
 @org.springframework.stereotype.Controller
-    public class Controller {
+public class Controller {
 
-        @Autowired
-        private FilmTitleRepository repository;
+    private static final Logger logger = LoggerFactory.getLogger(Controller.class);
 
-        @GetMapping("/entities")
-        public List<FilmTitle> getAllEntities() {
-            return (List<FilmTitle>) repository.findAll();
-        }
-    @GetMapping("/film")
-    public String film(@RequestParam(name="name", required=false) String name, Model model) {
-        List<FilmTitle> movies = repository.findByPrimaryTitle(name);
-        model.addAttribute("movies", movies);
-        return "greeting";
+    @Autowired
+    private FilmTitleRepository repository;
+
+    @GetMapping("/home")
+    public String firstPage() {
+        return "home";
     }
+
+    @GetMapping("/byPrimaryTitle")
+    public String getFilm(
+            @RequestParam(value = "title", required = false) String title,
+            Model model) {
+        logger.info("Searching for " + title);
+        List<FilmTitle> filmTitles = repository.findByPrimaryTitleContainingIgnoreCase(title);
+        model.addAttribute("filmTitles", filmTitles);
+        return "searchResult";
     }
+
+}
+
+
 

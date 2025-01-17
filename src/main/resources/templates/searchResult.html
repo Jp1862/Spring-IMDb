@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Search Form</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<h1>Films</h1>
+<h2>Search Again</h2>
+<div class="searchBarContainer">
+    <form action="/byPrimaryTitle" method="get">
+        <input type="text" id="search-input" name="title" placeholder="Search for films" class="search-input">
+        <button type="submit" id="search-btn" class="search-btn">Find</button>
+    </form>
+</div>
+<div>
+
+    <h2>Search Results</h2>
+    <ul>
+           <li th:each="film: ${filmTitles}">
+               <span th:text="${film.tconst}"></span>
+               <span th:text="${film.primaryTitle}"></span>
+           </li>
+    </ul>
+</div>
+</body>
+</html>

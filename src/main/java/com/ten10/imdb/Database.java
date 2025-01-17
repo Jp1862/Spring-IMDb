@@ -17,11 +17,12 @@ public class Database {
         BufferedReader reader;
 
         int count = 0;
-        int batch = 1000;
+        int batch = 2000;
         ArrayList<FilmTitle> newBatch = new ArrayList<>();
         try {
             reader = new BufferedReader(new FileReader("C:\\Users\\jacob.penn\\DEV\\IMDB\\imdb\\title.basics.tsv"));
             String line;
+            reader.readLine();
             while ((line = reader.readLine()) != null) {
                 String[] rows = line.split("\\t");
                 String id = rows[0];
@@ -32,9 +33,13 @@ public class Database {
                 if (count%batch ==0){
                     repository.saveAll(newBatch);
                     newBatch.clear();
-                    System.out.println("Added " + count + "movies");
+                    System.out.println("Added " + count + " movies");
                 }
                 count++;
+            }
+            if (!newBatch.isEmpty()){
+                repository.saveAll(newBatch);
+                System.out.println("Added final "+newBatch.size()+" movies");
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
