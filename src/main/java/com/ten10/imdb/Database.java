@@ -1,5 +1,4 @@
 package com.ten10.imdb;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -24,31 +23,39 @@ public class Database {
             String line;
             reader.readLine();
             int startYear;
+            int runTimeMinutes;
+            int filmBatch = 0;
             while ((line = reader.readLine()) != null) {
-                String[] rows = line.split("\\t");
-                String id = rows[0];
-                String primaryTitle = rows[2];
+                String[] column = line.split("\\t");
+                String id = column[0];
+                String primaryTitle = column[2];
 
                 try {
 
-                    startYear = Integer.parseInt(rows[5]);
+                    runTimeMinutes = Integer.parseInt(column[7]);
+                    startYear = Integer.parseInt(column[5]);
                 } catch (NumberFormatException nfe) {
-
+                    runTimeMinutes = 0;
                     startYear = Integer.MIN_VALUE;
                 }
-                FilmTitle filmTitle = new FilmTitle(id, primaryTitle, startYear);
+                FilmTitle filmTitle = new FilmTitle(id, primaryTitle, startYear, runTimeMinutes);
+                if (runTimeMinutes > 30) {
+                    newBatch.add(filmTitle);
+                }
 
-                newBatch.add(filmTitle);
                 if (count % batch == 0) {
                     repository.saveAll(newBatch);
+
+                    filmBatch += newBatch.size();
+                    System.out.println("Added " + filmBatch + " movies");
                     newBatch.clear();
-                    System.out.println("Added " + count + " movies");
                 }
                 count++;
             }
             if (!newBatch.isEmpty()) {
                 repository.saveAll(newBatch);
                 System.out.println("Added final " + newBatch.size() + " movies");
+                System.out.println("Total movies added: " + (filmBatch + newBatch.size()));
             }
         } catch (IOException e) {
             throw new RuntimeException(e);

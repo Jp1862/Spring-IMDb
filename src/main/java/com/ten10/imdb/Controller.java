@@ -27,26 +27,30 @@ public class Controller {
     @GetMapping("/byPrimaryTitle")
     public String getFilm(
             @RequestParam(value = "title", required = false) String title,
-            @RequestParam(value = "year",required = true) String year,
+            @RequestParam(value = "year", required = true) String year,
             Model model) {
         logger.info("Searching for " + title);
         List<FilmTitle> filmTitles = repository.findByPrimaryTitleContainingIgnoreCase(title);
         List<FilmTitle> finalFilms = new ArrayList<>();
-        for (FilmTitle film : filmTitles){
-            if (film.getStartYear()<1950 && year.equals("Pre-1950")){
+        separateByYear(year, filmTitles, finalFilms);
+        model.addAttribute("finalFilms", finalFilms);
+        return "searchResult";
+    }
+
+    private static void separateByYear(String year, List<FilmTitle> filmTitles, List<FilmTitle> finalFilms) {
+        for (FilmTitle film : filmTitles) {
+            if (film.getStartYear() < 1950 && year.equals("Pre-1950")) {
                 finalFilms.add(film);
-            }
-            else if (film.getStartYear()>=1950 && film.getStartYear()<1980 && year.equals("1950-1979")){
+            } else if (film.getStartYear() >= 1950 && film.getStartYear() < 1980 && year.equals("1950-1979")) {
                 finalFilms.add(film);
-            }  else if (film.getStartYear()>=1980 && film.getStartYear()<2010 && year.equals("1980-2009")){
+            } else if (film.getStartYear() >= 1980 && film.getStartYear() < 2010 && year.equals("1980-2009")) {
                 finalFilms.add(film);
-            }
-            else if (film.getStartYear()>=2010 && year.equals("2010-Present")){
+            } else if (film.getStartYear() >= 2010 && year.equals("2010-Present")) {
+                finalFilms.add(film);
+            } else if (year.equals("all")){
                 finalFilms.add(film);
             }
         }
-        model.addAttribute("finalFilms", finalFilms);
-        return "searchResult";
     }
 
 }
