@@ -13,7 +13,7 @@
     <form action="/byPrimaryTitle" method="get">
         <input type="text" id="search-input" name="title" placeholder="Search for films" class="search-input">
         <button type="submit" id="search-btn" class="search-btn">Find</button><br><br>
-        <input type="radio" id="pre-1950" name="year" value="Pre 1950" class="years">
+        <input type="radio" id="pre-1950" name="year" value="Pre-1950" class="years" checked="checked">
         <label for="pre-1950">Pre 1950</label>
         <input type="radio" id="1950-1979" name="year" value="1950-1979" class="years">
         <label for="1950-1979">1950-1979</label>
@@ -28,7 +28,7 @@
 
     <h2>Search Results</h2>
     <ul>
-           <li th:each="film: ${filmTitles}">
+           <li th:each="film: ${finalFilms}">
                <span th:text="${film.tconst}" id="filmId"></span>
                <span th:text="${film.primaryTitle}"></span>
                <span th:text="${film.startYear}"></span>

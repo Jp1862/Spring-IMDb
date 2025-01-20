@@ -32,23 +32,23 @@ public class Database {
                 try {
 
                     startYear = Integer.parseInt(rows[5]);
-                }
-                catch (NumberFormatException nfe){
+                } catch (NumberFormatException nfe) {
+
                     startYear = Integer.MIN_VALUE;
                 }
                 FilmTitle filmTitle = new FilmTitle(id, primaryTitle, startYear);
 
                 newBatch.add(filmTitle);
-                if (count%batch ==0){
+                if (count % batch == 0) {
                     repository.saveAll(newBatch);
                     newBatch.clear();
-                    System.out.println("Added " + (count) + " movies");
+                    System.out.println("Added " + count + " movies");
                 }
                 count++;
             }
-            if (!newBatch.isEmpty()){
+            if (!newBatch.isEmpty()) {
                 repository.saveAll(newBatch);
-                System.out.println("Added final "+newBatch.size()+" movies");
+                System.out.println("Added final " + newBatch.size() + " movies");
             }
         } catch (IOException e) {
             throw new RuntimeException(e);

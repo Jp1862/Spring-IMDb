@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @org.springframework.stereotype.Controller
@@ -25,10 +27,25 @@ public class Controller {
     @GetMapping("/byPrimaryTitle")
     public String getFilm(
             @RequestParam(value = "title", required = false) String title,
+            @RequestParam(value = "year",required = true) String year,
             Model model) {
         logger.info("Searching for " + title);
         List<FilmTitle> filmTitles = repository.findByPrimaryTitleContainingIgnoreCase(title);
-        model.addAttribute("filmTitles", filmTitles);
+        List<FilmTitle> finalFilms = new ArrayList<>();
+        for (FilmTitle film : filmTitles){
+            if (film.getStartYear()<1950 && year.equals("Pre-1950")){
+                finalFilms.add(film);
+            }
+            else if (film.getStartYear()>=1950 && film.getStartYear()<1980 && year.equals("1950-1979")){
+                finalFilms.add(film);
+            }  else if (film.getStartYear()>=1980 && film.getStartYear()<2010 && year.equals("1980-2009")){
+                finalFilms.add(film);
+            }
+            else if (film.getStartYear()>=2010 && year.equals("2010-Present")){
+                finalFilms.add(film);
+            }
+        }
+        model.addAttribute("finalFilms", finalFilms);
         return "searchResult";
     }
 
