@@ -1,0 +1,32 @@
+li {
+    list-style-type: none;
+    background-color: rgb(61, 54, 54);
+    font-size: medium;
+    padding: 10px;
+    color: rgb(197, 164, 66);
+text-align: center;
+  }
+  #filmId{
+    color: rgb(159, 106, 8);
+  }
+  span{
+    padding: 10px;
+  }
+  body{
+    background-color: rgb(0, 0, 0);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+  }
+  h1{
+    color: rgb(197, 164, 66);
+  }
+  button{
+    color: rgb(197, 164, 66);
+  }
+h2{
+    color: rgb(197, 164, 66);
+}
+label{
+    color: rgb(197, 164, 66);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: small;
+}

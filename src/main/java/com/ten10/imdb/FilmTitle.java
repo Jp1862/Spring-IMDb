@@ -12,14 +12,15 @@ public class FilmTitle {
 
     @Column (nullable = false, length = 500)
     private String primaryTitle;
+    private int startYear;
 
     protected FilmTitle(){
-
     }
 
-    public FilmTitle(String tconst, String primaryTitle){
+    public FilmTitle(String tconst, String primaryTitle, int startYear){
         this.tconst = tconst;
         this.primaryTitle = primaryTitle;
+        this.startYear = startYear;
     }
     @Override
     public String toString() {
@@ -34,5 +35,7 @@ public class FilmTitle {
     public String getPrimaryTitle() {
         return primaryTitle;
     }
+
+    public int getStartYear(){ return startYear;}
 
 }

@@ -10,9 +10,6 @@ import org.springframework.stereotype.Controller;
 @SpringBootApplication
 public class ImdbApplication {
 
-//    @Autowired
-//    FilmTitleRepository repository;
-//    private static final Logger log = LoggerFactory.getLogger(ImdbApplication.class);
 
     public static void main(String[] args) {
         SpringApplication.run(ImdbApplication.class, args);
