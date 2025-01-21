@@ -14,15 +14,17 @@ public class FilmTitle {
     private String primaryTitle;
     private int startYear;
     private int runTimeMinutes;
+    private double rating;
 
     protected FilmTitle() {
     }
 
-    public FilmTitle(String tconst, String primaryTitle, int startYear, int runTimeMinutes) {
+    public FilmTitle(String tconst, String primaryTitle, int startYear, int runTimeMinutes, double rating) {
         this.tconst = tconst;
         this.primaryTitle = primaryTitle;
         this.startYear = startYear;
         this.runTimeMinutes = runTimeMinutes;
+        this.rating = rating;
     }
 
     @Override
@@ -46,5 +48,9 @@ public class FilmTitle {
 
     public int getRunTimeMinutes() {
         return runTimeMinutes;
+    }
+
+    public double getRating() {
+        return rating;
     }
 }

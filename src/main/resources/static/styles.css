@@ -9,6 +9,9 @@ text-align: center;
   #filmId{
     color: rgb(159, 106, 8);
   }
+  #rating{
+  color: rgb(149, 234, 149);
+  }
   span{
     padding: 10px;
   }

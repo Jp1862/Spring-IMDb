@@ -13,6 +13,6 @@ public class DataLoader implements CommandLineRunner {
     }
     @Override
     public void run(String... args) throws Exception {
-        database.getBufferedReader();
+        database.getFiles();
     }
 }
