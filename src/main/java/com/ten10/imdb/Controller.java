@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 @org.springframework.stereotype.Controller
@@ -27,12 +28,13 @@ public class Controller {
     @GetMapping("/byPrimaryTitle")
     public String getFilm(
             @RequestParam(value = "title", required = false) String title,
-            @RequestParam(value = "year", required = true) String year,
+            @RequestParam(value = "year") String year,
             Model model) {
         logger.info("Searching for " + title);
         List<FilmTitle> filmTitles = repository.findByPrimaryTitleContainingIgnoreCase(title);
         List<FilmTitle> finalFilms = new ArrayList<>();
         separateByYear(year, filmTitles, finalFilms);
+        finalFilms.sort(Comparator.comparingDouble(FilmTitle::getRating).reversed());
         model.addAttribute("finalFilms", finalFilms);
         return "searchResult";
     }
