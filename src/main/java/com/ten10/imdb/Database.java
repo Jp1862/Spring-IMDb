@@ -17,9 +17,9 @@ public class Database {
     private FilmTitleRepository repository;
 
     public void getFiles() {
-        String tsvRatings = "C:\\Users\\jacob.penn\\DEV\\IMDB\\imdb\\title.ratings.tsv";
+        String tsvRatings = "title.ratings.tsv";
         Map<String, Double> ratingsMap = getRatings(tsvRatings);
-        String tsvTitle = "C:\\Users\\jacob.penn\\DEV\\IMDB\\imdb\\title.basics.tsv";
+        String tsvTitle = "title.basics.tsv";
         getTitles(tsvTitle, ratingsMap);
     }
 
